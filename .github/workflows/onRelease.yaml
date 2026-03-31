@@ -10,9 +10,10 @@ permissions:
   contents: read    # This is required for actions/checkout
 jobs:
   publish-ubuntu:
-    runs-on:
-        - ubuntu-24.04-arm
-        - ubuntu-24.04
+    strategy:
+      matrix:
+        runonos: ["ubuntu-24.04-arm", "ubuntu-24.04"]
+    runs-on: "${{ matrix.runonos }}"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
